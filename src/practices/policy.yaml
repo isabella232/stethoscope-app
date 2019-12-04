@@ -24,4 +24,3 @@ automaticUpdates: SUGGESTED
 screenLock: IF_SUPPORTED
 screenIdle: "<=120"
 remoteLogin: NEVER
-openWifiConnections: SUGGESTED

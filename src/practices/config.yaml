@@ -1,8 +1,11 @@
 allowHosts:
   - "stethoscope://main"
+  - "stethoscope://jupiterone"
 hostLabels:
   - pattern: "^http://127.0.0.1:3000"
     name: Local Server
+  - pattern: "^stethoscope://jupiterone"
+    name: JupiterOne Endpoint Compliance Agent
 policyServer:
 testHosts:
   # - url: "http://foo.bar.com"

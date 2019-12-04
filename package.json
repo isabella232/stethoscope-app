@@ -30,6 +30,9 @@
     "dev:electron-start": "node src/start-react",
     "dev:react-start": "react-scripts start",
     "prebuild": "run-s lint build:clean build:update-config build:react babel",
+    "j1build": "rm -r dist/; yarn j1build:mac && yarn j1build:w32lnx",
+    "j1build:mac": "yarn react-scripts build && yarn electron-builder -m",
+    "j1build:w32lnx": "./build_win32_linux.sh",
     "build": "run-s prebuild build:all",
     "postbuild": "run-s test:spectron",
     "postinstall": "electron-builder install-app-deps",
@@ -145,11 +148,15 @@
       "schema.graphql"
     ],
     "mac": {
-      "category": "public.app-category.utilities"
+      "category": "public.app-category.utilities",
+      "extraFiles": [
+        "j1agent/j1-endpoint-agent-darwin"
+      ]
     },
     "win": {
       "target": "nsis",
       "extraResources": [
+        "j1agent/j1-endpoint-agent-windows.exe",
         "bitlocker-status/bitlocker-status.exe",
         "bitlocker-status/bitlocker-status.exe.confg",
         "bitlocker-status/bitlocker-status.pdb",
@@ -168,7 +175,10 @@
     },
     "linux": {
       "target": "AppImage",
-      "category": "System"
+      "category": "System",
+      "extraResources": [
+        "j1agent/j1-endpoint-agent-linux"
+      ]
     },
     "protocols": [
       {
@@ -177,6 +187,12 @@
         "schemes": [
           "stethoscope"
         ]
+      }
+    ],
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "https://jupiterone-prod-us-public-resources.s3.amazonaws.com/powerup-downloads/"
       }
     ]
   }
