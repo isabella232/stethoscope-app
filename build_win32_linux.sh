@@ -12,3 +12,7 @@ perl -pi -e 's/Stethoscope Setup /Stethoscope-Setup-/g' dist/latest.yml && \
   for file in dist/*.exe; do
     [ -f "$file" ] && ( mv "$file" "$(echo "$file" | sed -e 's/ /-/g')" )
   done
+
+for file in dist/*.AppImage; do
+  [ -f "$file" ] && ( mv "$file" "$(echo "$file" | sed -e 's/.AppImage/-x86_64.AppImage/')" )
+done
